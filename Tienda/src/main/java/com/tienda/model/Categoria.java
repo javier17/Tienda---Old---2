@@ -2,6 +2,8 @@ package com.tienda.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,19 +14,38 @@ import javax.persistence.Table;
 public class Categoria {
 	
 	@Id
-	@Column(name = "id_categoria")
+	@Column(name = "id_categoria",length = 3)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idCategoria;
 	
-	
+	@Column(name = "nombre",length = 45)
 	private String nombre;
 	
-	private int estado;
+	@Column(name = "estado",length = 1)
+	private String estado;
 	
+	@Column(name = "descripcion",length = 2000)
 	private String descripcion;
 	
+	@Column(name = "foto",length = 100)
 	private String foto;
 	
+	
+	
+	
+
+	public Categoria() {
+		
+	}
+
+	public Categoria(int idCategoria, String nombre, String estado, String descripcion, String foto) {
+		
+		this.idCategoria = idCategoria;
+		this.nombre = nombre;
+		this.estado = estado;
+		this.descripcion = descripcion;
+		this.foto = foto;
+	}
 
 	public int getIdCategoria() {
 		return idCategoria;
@@ -42,11 +63,12 @@ public class Categoria {
 		this.nombre = nombre;
 	}
 
-	public int getEstado() {
+
+	public String getEstado() {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
