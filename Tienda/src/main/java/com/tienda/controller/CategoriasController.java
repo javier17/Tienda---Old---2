@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.tienda.DTO.Mensaje;
 import com.tienda.model.Categoria;
 import com.tienda.repository.ICategoriaRepository;
 import com.tienda.service.ICategoriaService;
 
+
+@CrossOrigin(origins = "*")//http://localhost:4200
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriasController {
@@ -54,8 +57,12 @@ public class CategoriasController {
 	public ResponseEntity crear(@RequestBody Categoria categoria) {
 		System.err.println(categoria);
 		serviceCategoria.guardar(categoria);
-		return new ResponseEntity("Categoria guardada", HttpStatus.CREATED);
+		
+		return new ResponseEntity(new Mensaje("Categoria guardada"), HttpStatus.CREATED);
 	}
+	
+	
+	
 	
 	@PutMapping
 	public ResponseEntity modificar(@RequestBody Categoria categoria) {
